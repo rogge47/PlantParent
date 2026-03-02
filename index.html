@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Meu Plant App</title>
+</head>
+<body>
+  <h2>Cadastrar Planta</h2>
+
+  <input id="nome" placeholder="Nome da planta"><br><br>
+  <input id="especie" placeholder="Espécie"><br><br>
+  <input id="ultima_rega" type="date"><br><br>
+  <input id="frequencia" placeholder="Frequência (dias)"><br><br>
+
+  <button onclick="cadastrar()">Salvar</button>
+
+  <script>
+    function cadastrar() {
+      fetch("http://localhost:5678/webhook/cadastrar-planta", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nome: document.getElementById("nome").value,
+          especie: document.getElementById("especie").value,
+          ultima_rega: document.getElementById("ultima_rega").value,
+          frequencia_dias: document.getElementById("frequencia").value
+        })
+      })
+      .then(res => res.json())
+      .then(data => alert("Salvo!"));
+    }
+  </script>
+</body>
+</html>
